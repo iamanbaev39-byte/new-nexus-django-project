@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block page_title %}Faollik jurnali{% endblock %}
+{% block content %}
+<div class="card"><div class="table-wrap"><table><thead><tr><th>Foydalanuvchi</th><th>Amal</th><th>Vaqt</th></tr></thead><tbody>
+{% for log in logs %}<tr><td>{{ log.user.username if log.user else 'Tizim' }}</td><td>{{ log.action }}</td><td>{{ log.created_at.strftime('%d.%m.%Y %H:%M') }}</td></tr>
+{% else %}<tr><td colspan="3" style="text-align:center;color:#64748B;">Yozuvlar yo‘q.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Bildirishnomalar{% endblock %}
+{% block content %}
+<div class="card">
+  <form method="POST" style="margin-bottom:14px;">{{ csrf_input }}<button class="btn btn-dark">Barchasini o‘qilgan qilish</button></form>
+  {% for notification in notifications %}
+  <div style="padding:14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;{% if not notification.is_read %}border-left:4px solid var(--primary);{% endif %}">
+    <strong>{{ notification.title }}</strong>
+    <p style="margin-top:5px;color:#64748B;">{{ notification.message }}</p>
+  </div>
+  {% else %}<p style="color:#64748B;">Yangi bildirishnomalar yo‘q.</p>{% endfor %}
+</div>
+{% endblock %}

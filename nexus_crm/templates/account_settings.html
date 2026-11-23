@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block page_title %}Hisob sozlamalari{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:680px;">
+  <form method="POST">
+    {{ csrf_input }}
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Login</label>
+        <input type="text" name="username" class="form-control" value="{{ account_user.username }}" autocomplete="username" required />
+      </div>
+      <div class="form-group">
+        <label>Joriy parol</label>
+        <input type="password" name="current_password" class="form-control" autocomplete="current-password" required />
+      </div>
+      <div class="form-group">
+        <label>Yangi parol</label>
+        <input type="password" name="new_password" class="form-control" autocomplete="new-password" />
+      </div>
+      <div class="form-group">
+        <label>Yangi parolni tasdiqlang</label>
+        <input type="password" name="confirm_password" class="form-control" autocomplete="new-password" />
+      </div>
+    </div>
+    <p style="font-size:13px;color:#6B7280;">Parolni o‘zgartirmasangiz, yangi parol maydonlarini bo‘sh qoldiring.</p>
+    <button type="submit" class="btn btn-primary">Saqlash</button>
+  </form>
+</div>
+{% endblock %}

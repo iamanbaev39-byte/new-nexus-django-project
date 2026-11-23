@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block page_title %}Foydalanuvchilar va rollar{% endblock %}
+{% block content %}
+<div class="card">
+  <h3 style="margin-bottom:14px;">Yangi foydalanuvchi</h3>
+  <form method="POST" class="form-grid">
+    {{ csrf_input }}
+    <input type="hidden" name="action" value="create" />
+    <div class="form-group"><label>Login</label><input class="form-control" name="username" required /></div>
+    <div class="form-group"><label>Parol</label><input class="form-control" type="password" name="password" minlength="8" required /></div>
+    <div class="form-group"><label>Rol</label><select class="form-control" name="role"><option value="staff">Xodim</option><option value="admin">Administrator</option></select></div>
+    <div><button class="btn btn-primary" style="margin-top:20px;">Qo‘shish</button></div>
+  </form>
+</div>
+<div class="card">
+  <h3 style="margin-bottom:14px;">Foydalanuvchilar</h3>
+  <div class="table-wrap"><table><thead><tr><th>Login</th><th>Rol</th><th>Holat</th><th>Amal</th></tr></thead><tbody>
+  {% for u in users %}
+  <tr><td><strong>{{ u.username }}</strong></td><td>{{ 'Administrator' if u.is_superuser or u.is_staff else 'Xodim' }}</td><td>{% if u.is_active %}<span class="badge badge-green">Faol</span>{% else %}<span class="badge badge-red">To‘xtatilgan</span>{% endif %}</td><td>
+    {% if u != request.user %}
+    <form method="POST">{{ csrf_input }}<input type="hidden" name="action" value="toggle" /><input type="hidden" name="user_id" value="{{ u.id }}" /><button class="btn btn-dark" style="padding:6px 10px;font-size:12px;">{{ 'To‘xtatish' if u.is_active else 'Faollashtirish' }}</button></form>
+    {% else %}<span style="color:#94A3B8;">Joriy hisob</span>{% endif %}
+  </td></tr>
+  {% endfor %}
+  </tbody></table></div>
+</div>
+{% endblock %}

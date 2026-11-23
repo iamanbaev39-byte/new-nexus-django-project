@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block page_title %}Hisobotlar{% endblock %}
+{% block content %}
+<div class="card">
+  <form method="GET" style="display:flex;gap:10px;align-items:center;">
+    <label><strong>Oy:</strong></label><input type="month" name="month" value="{{ month_key }}" class="form-control" style="max-width:200px;" /><button class="btn btn-dark">Ko‘rsatish</button>
+  </form>
+</div>
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-label">Jami o‘quvchilar</div><div class="stat-value">{{ students }}</div></div>
+  <div class="stat-card"><div class="stat-label">To‘lov qilganlar</div><div class="stat-value stat-accent">{{ paid_students }}</div></div>
+  <div class="stat-card"><div class="stat-label">Qarzdorlar</div><div class="stat-value">{{ unpaid_students }}</div></div>
+  <div class="stat-card"><div class="stat-label">To‘lov tushumi</div><div class="stat-value">{{ "{:,.0f}".format(monthly_income) }} so‘m</div></div>
+  <div class="stat-card"><div class="stat-label">Ish haqi</div><div class="stat-value">{{ "{:,.0f}".format(salary_expenses) }} so‘m</div></div>
+  <div class="stat-card"><div class="stat-label">Boshqa xarajatlar</div><div class="stat-value">{{ "{:,.0f}".format(other_expenses) }} so‘m</div></div>
+  <div class="stat-card"><div class="stat-label">Davomat yozuvlari</div><div class="stat-value">{{ attendance_records }}</div></div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ brand_name }} — Education CRM</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-badge">N</div>
+      <div class="brand-title">{{ brand_name }}</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('teachers_list') }}">O‘qituvchilar</a></li>
+      <li><a href="{{ url_for('students_list') }}">O‘quvchilar</a></li>
+      <li><a href="{{ url_for('courses_view') }}">Kurslar va Guruhlar</a></li>
+      <li><a href="{{ url_for('attendance_view') }}">Davomat</a></li>
+      <li><a href="{{ url_for('payroll_view') }}">Oylik (Payroll)</a></li>
+      <li><a href="{{ url_for('account_settings') }}">Hisob sozlamalari</a></li>
+      {% if current_user.role == 'admin' %}
+      <li><a href="{{ url_for('users_view') }}">Foydalanuvchilar</a></li>
+      <li><a href="{{ url_for('reports') }}">Hisobotlar</a></li>
+      <li><a href="{{ url_for('notifications') }}">Bildirishnomalar</a></li>
+      <li><a href="{{ url_for('settings') }}">Sozlamalar</a></li>
+      <li><a href="{{ url_for('activity') }}">Faollik jurnali</a></li>
+      {% endif %}
+    </ul>
+    <form method="POST" action="{{ url_for('logout') }}">
+      {{ csrf_input }}
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Chiqish</button>
+    </form>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <h1>{% block page_title %}{{ brand_name }} CRM{% endblock %}</h1>
+      <span class="badge badge-blue">{{ current_user.full_name }}</span>
+    </div>
+
+    {% for msg in messages %}
+      <div class="alert">{{ msg }}</div>
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

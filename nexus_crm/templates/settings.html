@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Sozlamalar{% endblock %}
+{% block content %}
+<div class="card" style="max-width:680px;">
+  <form method="POST" class="form-grid">
+    {{ csrf_input }}
+    <div class="form-group"><label>Tashkilot nomi</label><input class="form-control" name="name" value="{{ settings_obj.name }}" required /></div>
+    <div class="form-group"><label>Telefon</label><input class="form-control" name="phone" value="{{ settings_obj.phone }}" /></div>
+    <div class="form-group" style="grid-column:1/-1;"><label>Manzil</label><input class="form-control" name="address" value="{{ settings_obj.address }}" /></div>
+    <div><button class="btn btn-primary">Saqlash</button></div>
+  </form>
+</div>
+{% endblock %}
